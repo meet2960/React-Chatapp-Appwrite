@@ -23,7 +23,7 @@ export default function LogoutButton() {
       setLoading(true);
       return account
         .deleteSession(userSession.$id)
-        .then((response: unknown) => {
+        .then(() => {
           setLoading(false);
           navigate("/login");
           toast.success("Logout Successfully");

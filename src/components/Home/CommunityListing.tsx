@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { databases } from "../../config/appwriteConfig";
 import conf from "../../conf/conf";
-import { Query, AppwriteException } from "appwrite";
+import { AppwriteException } from "appwrite";
 import toast from "react-hot-toast";
 import { communityStore } from "../../state/communityStore";
 import CommunitySkeleton from "./CommuintySkeleton";
-import { Button, Card, CardBody } from "@nextui-org/react";
+import { Card, CardBody } from "@nextui-org/react";
 import { Link } from "react-router-dom";
 
 const CommunityListing = () => {
@@ -43,7 +43,7 @@ const CommunityListing = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {communityState.communities.length > 0 &&
-            communityState.communities.map((items, index) => (
+            communityState.communities.map((items) => (
               <Card key={items.$id}>
                 <CardBody className="gap-y-2">
                   <h4 className="text-xl font-bold">{items?.Name}</h4>

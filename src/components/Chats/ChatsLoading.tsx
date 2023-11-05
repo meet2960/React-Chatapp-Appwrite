@@ -7,7 +7,7 @@ const ChatsLoading = () => {
     <React.Fragment>
       <div className="flex flex-col">
         {emptyArray &&
-          emptyArray.map((items, index) =>
+          emptyArray.map((items) =>
             items % 2 === 0 ? (
               <div
                 key={items}

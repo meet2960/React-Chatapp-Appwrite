@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Input, user } from "@nextui-org/react";
-import { AppwriteException, Databases, ID, Models } from "appwrite";
+import { Input } from "@nextui-org/react";
+import { AppwriteException, ID, Models } from "appwrite";
 import {
   CHAT_COLLECTION_ID,
   databases,
@@ -100,7 +100,7 @@ const ChatPage = () => {
   const deleteMessage = (id: string) => {
     databases
       .deleteDocument(conf.appwriteDatabaseId, CHAT_COLLECTION_ID, id)
-      .then((response) => {
+      .then(() => {
         toast.success("Message Deleted");
         chatState.deleteChat(id);
       })
@@ -119,7 +119,7 @@ const ChatPage = () => {
           <div className="flex flex-col">
             <div className="flex-1 p-4 mb-20">
               {chatState.chats.length > 0 &&
-                chatState.chats.map((items, index) =>
+                chatState.chats.map((items) =>
                   items["user_id"] === userData.$id ? (
                     <div className="flex justify-end mb-3" key={items.$id}>
                       <div className="bg-slate-800 p-5 text-slate-100 max-w-lg rounded-xl">
