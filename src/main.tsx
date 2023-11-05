@@ -5,6 +5,7 @@ import { RouterProvider } from "react-router-dom";
 import { routes } from "./routes/index.tsx";
 import { Toaster } from "react-hot-toast";
 import "./index.css";
+import "./assets/styles/app.scss";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <NextUIProvider>

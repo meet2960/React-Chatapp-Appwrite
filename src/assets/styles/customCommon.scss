@@ -1,0 +1,18 @@
+.chat-listing {
+  .chats-list {
+    .current-user {
+      cursor: pointer;
+      .icons-list {
+        visibility: hidden;
+      }
+      &:hover {
+        .icons-list {
+          visibility: visible;
+        }
+      }
+    }
+    .other-user {
+      cursor: pointer;
+    }
+  }
+}

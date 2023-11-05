@@ -35,57 +35,44 @@ export default function Header() {
 
   return (
     <React.Fragment>
-      <div className="shadow-lg container">
-        <Navbar
-          onMenuOpenChange={setIsMenuOpen}
-          maxWidth="full"
-          className="px-0"
-        >
-          <NavbarContent>
-            <NavbarMenuToggle
-              aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-              className="sm:hidden"
-            />
-            <NavbarBrand>
-              <NavLink to={"/"}>
-                <h4 className="text-2xl font-semibold text-primary">MyChats</h4>
-              </NavLink>
-            </NavbarBrand>
-          </NavbarContent>
+      <Navbar
+        onMenuOpenChange={setIsMenuOpen}
+        maxWidth="full"
+        className="shadow-lg"
+      >
+        <NavbarContent>
+          <NavbarMenuToggle
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            className="sm:hidden"
+          />
+          <NavbarBrand>
+            <NavLink to={"/"}>
+              <h4 className="text-2xl font-semibold text-primary">MyChats</h4>
+            </NavLink>
+          </NavbarBrand>
+        </NavbarContent>
 
-          <NavbarContent className="hidden sm:flex gap-4" justify="center">
-            <NavbarItem>
-              <NavLink to={"/chat"}>Chat</NavLink>
-            </NavbarItem>
-            <NavbarItem isActive>
-              <Link href="#" aria-current="page">
-                All Communities
-              </Link>
-            </NavbarItem>
-            <NavbarItem>
-              <Link color="foreground" href="#">
-                Profile
-              </Link>
-            </NavbarItem>
-          </NavbarContent>
-          <NavbarContent justify="end">
-            <NavbarItem className="hidden lg:flex">{user.name}</NavbarItem>
-            <NavbarItem className="hidden lg:flex">
-              <Link href="#">Login</Link>
-            </NavbarItem>
-            <NavbarItem>
-              <LogoutButton />
-            </NavbarItem>
-          </NavbarContent>
-          <NavbarMenu>
-            {menuItems.map((item, index) => (
-              <NavbarMenuItem key={`${item}-${index}`}>
-                <NavLink to={"/"}>{item}</NavLink>
-              </NavbarMenuItem>
-            ))}
-          </NavbarMenu>
-        </Navbar>
-      </div>
+        <NavbarContent className="hidden sm:flex gap-4" justify="center">
+          <NavbarItem>
+            <Link color="foreground" href="#">
+              My Profile
+            </Link>
+          </NavbarItem>
+        </NavbarContent>
+        <NavbarContent justify="end">
+          <NavbarItem className="hidden lg:flex">{user.name}</NavbarItem>
+          <NavbarItem>
+            <LogoutButton />
+          </NavbarItem>
+        </NavbarContent>
+        <NavbarMenu>
+          {menuItems.map((item, index) => (
+            <NavbarMenuItem key={`${item}-${index}`}>
+              <NavLink to={"/"}>{item}</NavLink>
+            </NavbarMenuItem>
+          ))}
+        </NavbarMenu>
+      </Navbar>
     </React.Fragment>
   );
 }

@@ -12,5 +12,5 @@ h2 {
   @apply text-4xl;
 }
 nav header {
-  padding: 0 !important;
+  padding: 1rem !important;
 }

@@ -9,7 +9,7 @@ import {
   Button,
 } from "@nextui-org/react";
 import { useNavigate, NavLink } from "react-router-dom";
-import { useForm, Controller } from "react-hook-form";
+import { useForm, Controller, SubmitErrorHandler } from "react-hook-form";
 import { account } from "../../config/appwriteConfig";
 import { ID, AppwriteException } from "appwrite";
 import toast from "react-hot-toast";
@@ -24,12 +24,12 @@ const RegisterPage = () => {
   const {
     control,
     handleSubmit,
-    formState: { isSubmitting },
+    formState: { errors, isSubmitting },
   } = useForm({
     defaultValues: {
       name: "",
-      email: "meet@gmail.com",
-      password: "meet@",
+      email: "",
+      password: "",
     },
   });
 
@@ -46,7 +46,9 @@ const RegisterPage = () => {
         toast.error(error.message);
       });
   };
-
+  const onError: SubmitErrorHandler<RegisterForm> = (errors, e) => {
+    console.log("errors", errors);
+  };
   return (
     <React.Fragment>
       <div className="h-screen flex justify-center items-center flex-col">
@@ -57,21 +59,24 @@ const RegisterPage = () => {
             </CardHeader>
             <Divider />
             <CardBody>
-              <form onSubmit={handleSubmit(handleRegisterUser)}>
+              <form onSubmit={handleSubmit(handleRegisterUser, onError)}>
                 <div className="flex flex-col">
-                  <div className="mb-5">
+                  <div className="mb-5 position-relative">
                     <Controller
                       name="name"
                       control={control}
                       rules={{
-                        required: true,
+                        required: "Full Name is Required",
                       }}
                       render={({ field }) => (
                         <Input
                           {...field}
+                          className="relative"
                           type="text"
-                          variant={"flat"}
+                          variant={"bordered"}
                           label="Full Name"
+                          isInvalid={errors["name"] ? true : false}
+                          errorMessage={errors["name"]?.message}
                         />
                       )}
                     />
@@ -81,7 +86,7 @@ const RegisterPage = () => {
                       name="email"
                       control={control}
                       rules={{
-                        required: true,
+                        required: "Email is Required",
                         pattern: {
                           value: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
                           message: "Email address must be a valid address",
@@ -90,9 +95,12 @@ const RegisterPage = () => {
                       render={({ field }) => (
                         <Input
                           {...field}
+                          className="relative"
                           type="email"
-                          variant={"flat"}
+                          variant={"bordered"}
                           label="Email"
+                          isInvalid={errors["email"] ? true : false}
+                          errorMessage={errors["email"]?.message}
                         />
                       )}
                     />
@@ -102,14 +110,17 @@ const RegisterPage = () => {
                       name="password"
                       control={control}
                       rules={{
-                        required: true,
+                        required: "Password is Required",
                       }}
                       render={({ field }) => (
                         <Input
                           {...field}
+                          className="relative"
                           type="password"
-                          variant={"flat"}
+                          variant={"bordered"}
                           label="Password"
+                          isInvalid={errors["password"] ? true : false}
+                          errorMessage={errors["password"]?.message}
                         />
                       )}
                     />
