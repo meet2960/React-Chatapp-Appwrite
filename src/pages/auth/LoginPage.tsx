@@ -26,11 +26,11 @@ const LoginPage = () => {
   const {
     control,
     handleSubmit,
-    formState: { isSubmitting },
+    formState: { errors, isSubmitting },
   } = useForm({
     defaultValues: {
-      email: "meet@gmail.com",
-      password: "meet@123",
+      email: "",
+      password: "",
     },
   });
 
@@ -79,6 +79,9 @@ const LoginPage = () => {
                           type="email"
                           variant={"flat"}
                           label="Email"
+                          className="relative"
+                          isInvalid={errors["email"] ? true : false}
+                          errorMessage={errors["email"]?.message}
                         />
                       )}
                     />
@@ -96,6 +99,9 @@ const LoginPage = () => {
                           type="password"
                           variant={"flat"}
                           label="Password"
+                          className="relative"
+                          isInvalid={errors["password"] ? true : false}
+                          errorMessage={errors["password"]?.message}
                         />
                       )}
                     />

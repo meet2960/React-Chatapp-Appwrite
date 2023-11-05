@@ -95,10 +95,10 @@ const RegisterPage = () => {
                       render={({ field }) => (
                         <Input
                           {...field}
-                          className="relative"
                           type="email"
                           variant={"bordered"}
                           label="Email"
+                          className="relative"
                           isInvalid={errors["email"] ? true : false}
                           errorMessage={errors["email"]?.message}
                         />
