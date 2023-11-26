@@ -46,7 +46,7 @@ const RegisterPage = () => {
         toast.error(error.message);
       });
   };
-  const onError: SubmitErrorHandler<RegisterForm> = (errors, e) => {
+  const onError: SubmitErrorHandler<RegisterForm> = (errors) => {
     console.log("errors", errors);
   };
   return (
