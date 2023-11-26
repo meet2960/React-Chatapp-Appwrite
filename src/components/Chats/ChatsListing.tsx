@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Button, Input } from "@nextui-org/react";
-import { AppwriteException, ID, Models } from "appwrite";
+import { AppwriteException, ID, Models, Query } from "appwrite";
 import {
   CHAT_COLLECTION_ID,
   databases,
@@ -53,21 +53,25 @@ const ChatsListing = () => {
 
   const fetchMessages = () => {
     setChatsLoading(true);
-    databases
-      .listDocuments(conf.appwriteDatabaseId, CHAT_COLLECTION_ID)
-      .then((response) => {
-        setChatsLoading(true);
-        chatState.setChat(response.documents);
-        toast.success("Fetch Success");
-        console.log("fetch message date and time", response.documents);
-      })
-      .catch((error: AppwriteException) => {
-        console.log("object");
-        toast.error(error.message);
-      })
-      .finally(() => {
-        setChatsLoading(false);
-      });
+    if (id) {
+      databases
+        .listDocuments(conf.appwriteDatabaseId, CHAT_COLLECTION_ID, [
+          Query.equal("community_id", id),
+        ])
+        .then((response) => {
+          setChatsLoading(true);
+          chatState.setChat(response.documents);
+          toast.success("Fetch Success");
+          console.log("fetch message date and time", response.documents);
+        })
+        .catch((error: AppwriteException) => {
+          console.log("object");
+          toast.error(error.message);
+        })
+        .finally(() => {
+          setChatsLoading(false);
+        });
+    }
   };
 
   useEffect(() => {
@@ -98,6 +102,9 @@ const ChatsListing = () => {
       );
       isFetched.current = true;
     }
+    return () => {
+      chatState.clearChats();
+    };
   }, []);
 
   const deleteMessage = (id: string) => {

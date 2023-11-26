@@ -35,6 +35,7 @@ const CommunityListing = () => {
       isDataFetched.current = true;
     }
   }, []);
+
   return (
     <div>
       <h3 className="text-2xl mb-5">Communitites :</h3>
